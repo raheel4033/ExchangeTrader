@@ -1,0 +1,71 @@
+# .NET files and directories
+*.obj
+*.exe
+*.dll
+*.pdb
+*.user
+*.suo
+*.cache
+*.log
+
+# Visual Studio files
+.vscode/
+.vs/
+*_i.c
+*_p.c
+*.suo
+*.sln*
+*.sw?
+*.user
+*.tmp
+*.log
+*.vspscc
+*.vssscc
+.build/
+
+# Rider files
+.idea/
+
+# Resharper files
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings
+
+# Test Results
+[Tt]est[Rr]esult*
+
+# NCrunch
+_NCrunch_*
+.*crunch*.local.xml
+
+# Visual Studio Code files
+.vscode/
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Xamarin
+ios/*.sln
+ios/*.csproj
+ios/*.fsproj
+android/*.sln
+android/*.csproj
+android/*.fsproj
