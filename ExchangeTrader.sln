@@ -5,6 +5,8 @@ VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExchangeTrader", "ExchangeTrader\ExchangeTrader.csproj", "{13150A44-6123-4667-B0D3-5FDAD1E7D35F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModels", "DataModels\DataModels.csproj", "{DDC3FE15-FA19-4D1C-80C2-790238C0B283}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{13150A44-6123-4667-B0D3-5FDAD1E7D35F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13150A44-6123-4667-B0D3-5FDAD1E7D35F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13150A44-6123-4667-B0D3-5FDAD1E7D35F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDC3FE15-FA19-4D1C-80C2-790238C0B283}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDC3FE15-FA19-4D1C-80C2-790238C0B283}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDC3FE15-FA19-4D1C-80C2-790238C0B283}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDC3FE15-FA19-4D1C-80C2-790238C0B283}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
