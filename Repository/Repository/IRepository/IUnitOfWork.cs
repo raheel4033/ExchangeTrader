@@ -9,7 +9,7 @@ namespace DataModels.Repository.IRepository
 {
     public interface IUnitOfWork
     {
-         IProductRepository ProductRepository { get; }
+        IProductRepository ProductRepository { get; }
             IOrderRepository OrderRepository { get; }
         void save();
     }
