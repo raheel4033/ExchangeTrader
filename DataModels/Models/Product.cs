@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +10,7 @@ namespace DataModels.Models
 {
     public class Product
     {
+       
         public int productID { get; set; }
         public string? Symbol { get; set; }
         public int lotSize { get; set; }
@@ -17,5 +20,6 @@ namespace DataModels.Models
         public string? Description { get; set; }
         public string? field { get; set; }
 
+        public ICollection<Order> Orders { get; set; }
     }
 }
