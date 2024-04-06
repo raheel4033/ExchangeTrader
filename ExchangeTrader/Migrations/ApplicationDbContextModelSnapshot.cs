@@ -30,14 +30,15 @@ namespace ExchangeTrader.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
 
-                    b.Property<long>("accountID")
-                        .HasColumnType("bigint");
+                    b.Property<string>("accountID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(8)");
 
                     b.Property<string>("broker")
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("clientOrderId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(8)");
 
                     b.Property<long>("entryTime")
                         .HasColumnType("bigint");
@@ -82,7 +83,7 @@ namespace ExchangeTrader.Migrations
                         new
                         {
                             OrderId = 1,
-                            accountID = 1L,
+                            accountID = "1",
                             broker = "Interactive Brokers",
                             clientOrderId = "AB12",
                             entryTime = 1234L,
@@ -100,7 +101,7 @@ namespace ExchangeTrader.Migrations
                         new
                         {
                             OrderId = 2,
-                            accountID = 2L,
+                            accountID = "2",
                             broker = "Raheel Investors",
                             clientOrderId = "XZ31",
                             entryTime = 1234L,
@@ -130,11 +131,10 @@ namespace ExchangeTrader.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Symbol")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("field")
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<int>("lotSize")
                         .HasColumnType("int");
@@ -146,7 +146,7 @@ namespace ExchangeTrader.Migrations
                         .HasColumnType("nvarchar(3)");
 
                     b.Property<decimal>("tickSize")
-                        .HasColumnType("decimal(18, 2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("productID");
 
@@ -178,12 +178,17 @@ namespace ExchangeTrader.Migrations
             modelBuilder.Entity("DataModels.Models.Order", b =>
                 {
                     b.HasOne("DataModels.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("productID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("DataModels.Models.Product", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExchangeTrader.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240402233556_AddProductAndOrderTableToDB")]
-    partial class AddProductAndOrderTableToDB
+    [Migration("20240406164742_AddProductOrderTablesToDb")]
+    partial class AddProductOrderTablesToDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,14 +33,15 @@ namespace ExchangeTrader.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
 
-                    b.Property<long>("accountID")
-                        .HasColumnType("bigint");
+                    b.Property<string>("accountID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(8)");
 
                     b.Property<string>("broker")
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("clientOrderId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(8)");
 
                     b.Property<long>("entryTime")
                         .HasColumnType("bigint");
@@ -80,44 +81,6 @@ namespace ExchangeTrader.Migrations
                     b.HasIndex("productID");
 
                     b.ToTable("Orders");
-
-                    b.HasData(
-                        new
-                        {
-                            OrderId = 1,
-                            accountID = 1L,
-                            broker = "Interactive Brokers",
-                            clientOrderId = "AB12",
-                            entryTime = 1234L,
-                            orderStatus = "Open",
-                            orderType = "Market",
-                            price = 15000L,
-                            productID = 1,
-                            quantity = 200L,
-                            side = "Buy",
-                            symbol = "AAPL",
-                            timeInForce = "GTC",
-                            transactionTime = 55L,
-                            userId = 1L
-                        },
-                        new
-                        {
-                            OrderId = 2,
-                            accountID = 2L,
-                            broker = "Raheel Investors",
-                            clientOrderId = "XZ31",
-                            entryTime = 1234L,
-                            orderStatus = "Open",
-                            orderType = "Market",
-                            price = 20000L,
-                            productID = 2,
-                            quantity = 100L,
-                            side = "Sell",
-                            symbol = "GOOGL",
-                            timeInForce = "Day",
-                            transactionTime = 23L,
-                            userId = 2L
-                        });
                 });
 
             modelBuilder.Entity("DataModels.Models.Product", b =>
@@ -133,11 +96,11 @@ namespace ExchangeTrader.Migrations
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Symbol")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("field")
-                        .HasColumnType("nvarchar(50)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<int>("lotSize")
                         .HasColumnType("int");
@@ -148,45 +111,29 @@ namespace ExchangeTrader.Migrations
                     b.Property<string>("settleCurrency")
                         .HasColumnType("nvarchar(3)");
 
-                    b.Property<decimal>("tickSize")
-                        .HasColumnType("decimal(18, 2)");
+                    b.Property<string>("tickSize")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(3)");
 
                     b.HasKey("productID");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            productID = 1,
-                            Description = "Apple Inc. Common Stock",
-                            Symbol = "AAPL",
-                            lotSize = 100,
-                            qouteCurrency = "USD",
-                            settleCurrency = "PKR",
-                            tickSize = 0.01m
-                        },
-                        new
-                        {
-                            productID = 2,
-                            Description = "Google LLC Class C Capital Stock",
-                            Symbol = "GOOGL",
-                            lotSize = 100,
-                            qouteCurrency = "INR",
-                            settleCurrency = "USD",
-                            tickSize = 0.05m
-                        });
                 });
 
             modelBuilder.Entity("DataModels.Models.Order", b =>
                 {
                     b.HasOne("DataModels.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("productID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("DataModels.Models.Product", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }
